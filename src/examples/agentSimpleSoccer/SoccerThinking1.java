@@ -10,6 +10,7 @@ package examples.agentSimpleSoccer;
 import agentIO.PerceptorInput;
 import directMotion.LookAroundMotion;
 import java.util.HashMap;
+import java.util.LinkedList;
 import keyframeMotion.KeyframeMotion;
 import localFieldView.BallModel;
 import localFieldView.GoalPostModel;
@@ -69,6 +70,7 @@ public class SoccerThinking1 {
   BallModel ball;
   GoalPostModel oppGoalLPost, oppGoalRPost;
   PlayerModel oppPlayer;
+  LinkedList playerList;
   private static final double TOLLERATED_DEVIATION = Math.toRadians(10);
   private static final double TOLLERATED_DISTANCE = 0.55; // in meters
   private double lookTime;
@@ -92,7 +94,8 @@ public class SoccerThinking1 {
     this.oppGoalRPost = goalPosts.get(GoalPostID.G2R);
     this.lookTime = LookAroundMotion.LOOK_TIME;
     this.robotIsWalking = false;
-    //this.oppPlayer = localView.getAllPlayers();   TODO
+    this.playerList = localView.getAllPlayers();   //TODO
+    
   }
 
   /**
@@ -105,7 +108,9 @@ public class SoccerThinking1 {
     if (motion.ready()) {
       
       log.log("new decision");
+      this.playerList = localView.getAllPlayers();   //TODO
 
+      System.out.print(playerList);
       double serverTime = percIn.getServerTime();
       
       // if the robot has fallen down
