@@ -63,7 +63,7 @@ import util.Logger;
  */
  
 public class SoccerThinkingTor {
-  int a = 1;
+  int a = 2;
   Logger log;
   PerceptorInput percIn;
   LocalFieldView localView;
