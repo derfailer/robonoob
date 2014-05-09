@@ -61,8 +61,9 @@ import util.Logger;
  * A correct example gives Agent_SimpleSoccer of package
  * examples.agentSimpleSoccer.
  */
+ 
 public class SoccerThinkingTor {
-
+  int a = 1;
   Logger log;
   PerceptorInput percIn;
   LocalFieldView localView;
