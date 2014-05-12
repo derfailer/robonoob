@@ -62,7 +62,8 @@ public class Agent_SimpleSoccerStuermer {
   private LocalFieldView localView;
   private SoccerThinkingStuermer soccerThinking1;
   private LookAroundMotion lookAround;
-  
+      short bla;
+
   /** A player is identified in the server by its player ID and its team name. 
    There are at most two teams an the field, and every agent of a single team 
    must have a unique player ID between 1 and 11. 
