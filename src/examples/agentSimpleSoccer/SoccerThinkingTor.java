@@ -4,7 +4,9 @@
 * @author Monika Domanska
 * @version 1.0
 *******************************************************************************/
-
+/*
+        TOR
+*/
 package examples.agentSimpleSoccer;
 
 import agentIO.PerceptorInput;
