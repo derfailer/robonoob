@@ -64,6 +64,7 @@ import util.Logger;
  * examples.agentSimpleSoccer.
  */
 public class SoccerThinkingStuermer {
+    short bla;
 
   Logger log;
   PerceptorInput percIn;
