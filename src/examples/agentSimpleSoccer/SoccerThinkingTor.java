@@ -46,6 +46,7 @@ public class SoccerThinkingTor {
   Vector3D vecGoal;
   Vector3D vecRobotBodyPart;
   Vector3D vecLine;
+  Vector3D[] heads;
 
   /**
    * Constructor.
@@ -66,7 +67,7 @@ public class SoccerThinkingTor {
     this.oppGoalRPost = goalPosts.get(GoalPostID.G2R);
     this.lookTime = LookAroundMotion.LOOK_TIME;
     this.robotIsWalking = false;
-    this.playerList = localView.getAllPlayers();   //TODO
+    //LinkedList<PlayerModel> players = localView.getAllPlayers(); 
     
   }
 
@@ -84,21 +85,37 @@ public class SoccerThinkingTor {
       for (PlayerModel pm: players)
         log.log(pm.toString());
         // Get the reference to a player, when it is sensed for the first time.
-        if (specificPlayer == null) {
-            if (!players.isEmpty()) specificPlayer = players.getFirst();
+        
+            if (!players.isEmpty()) log.log("Have seen a Player/Players");//specificPlayer = players.getFirst();
+        
+            if(!players.isEmpty()){
+                for(int i = 0; i == players.lastIndexOf(a); i ++){
+                    specificPlayer = players.get(i);
+                    vecRobotBodyPart = specificPlayer.getBodyPart(BodyPartName.Head);
+                    heads[i] = vecRobotBodyPart;
+                    System.out.println("BodyPart Number "+i+" :"+heads[i].toString());
+
+                    
+                }
+                
+                
+                
+                
+            }
             else log.log("Do not see Agent_Dummy (yet).");  
-        }
+        
+        
       // Access the data of a sensed player. Keep in mind, that not all
       // parts of the player are visible at any time, depending on the
       // orientations of the agent´s own robot and the sensed player .
-        if (specificPlayer != null) for (RobotConsts.BodyPartName bp : RobotConsts.BodyPartName.values()){
+      /*  if (specificPlayer != null) for (RobotConsts.BodyPartName bp : RobotConsts.BodyPartName.values()){
             vecRobotBodyPart = specificPlayer.getBodyPart(bp);
             if (vecRobotBodyPart != null){
                 log.log("Access to details of robot, e.g. the distance to "+ bp +" of Agent_Dummy: "
                 + vecRobotBodyPart.getNorm() + ", and his team: "+ specificPlayer.getTeam() );
                 break;
             }
-       }
+       }*/
       
       if (motion.ready()) {
       
