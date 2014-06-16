@@ -83,7 +83,7 @@ public class SoccerThinkingTor {
 
       log.log("Player models");
       for (PlayerModel pm: players)
-        log.log(pm.toString());
+        //log.log(pm.toString());
         // Get the reference to a player, when it is sensed for the first time.
         
             if (!players.isEmpty()) log.log("Have seen a Player/Players");//specificPlayer = players.getFirst();
@@ -93,14 +93,8 @@ public class SoccerThinkingTor {
                     specificPlayer = players.get(i);
                     vecRobotBodyPart = specificPlayer.getBodyPart(BodyPartName.Head);
                     heads[i] = vecRobotBodyPart;
-                    System.out.println("BodyPart Number "+i+" :"+heads[i].toString());
-
-                    
-                }
-                
-                
-                
-                
+                    System.out.println("BodyPart Number "+i+" :"+vecRobotBodyPart.toString());   
+                }        
             }
             else log.log("Do not see Agent_Dummy (yet).");  
         
@@ -120,9 +114,9 @@ public class SoccerThinkingTor {
       if (motion.ready()) {
       
       log.log("new decision");
-      this.playerList = localView.getAllPlayers();   //TODO
+      //this.playerList = localView.getAllPlayers();   //TODO
 
-      System.out.print(playerList);
+      System.out.println(playerList);
       double serverTime = percIn.getServerTime();
       
       // if the robot has fallen down
@@ -132,11 +126,7 @@ public class SoccerThinkingTor {
         } else {
           motion.setRollOverToBack();
         }
-      } 
-      
-      
-          
-    
+      }    
     }
   }
 }
