@@ -28,6 +28,7 @@ import util.RobotConsts.BodyPartName;
  
 public class SoccerThinkingTor {
   int a = 2;
+  int i = 0;
   PlayerModel player = null;
   Logger log;
   PerceptorInput percIn;
@@ -46,7 +47,12 @@ public class SoccerThinkingTor {
   Vector3D vecGoal;
   Vector3D vecRobotBodyPart;
   Vector3D vecLine;
-  Vector3D[] heads;
+  
+  Vector3D[] vecHeads;
+  String[] teams;
+  String[] playerID;
+  LinkedList<PlayerModel> players; 
+  
 
   /**
    * Constructor.
@@ -79,26 +85,27 @@ public class SoccerThinkingTor {
    */
   
   public void decide() {
-      LinkedList<PlayerModel> players = localView.getAllPlayers(); 
+      
+      
+      this.players = localView.getAllPlayers();      
+      if(this.players.isEmpty()){
+          System.out.println("Playerlist empty (players == [])");
+          System.out.println("Letzter Index: " + this.players.lastIndexOf(a));
+      }
+      else{
+        i = 0;
+        for (PlayerModel pm: players){
+          
+           log.log("Have seen a Player/Players");//specificPlayer = players.getFirst();
+           vecHeads[i] = pm.getBodyPart(BodyPartName.Head);
+           teams[i] = pm.getTeam();
+           playerID[i] = pm.getID();
+           
+           System.out.println(vecRobotBodyPart);
+           
 
-      log.log("Player models");
-      for (PlayerModel pm: players)
-        //log.log(pm.toString());
-        // Get the reference to a player, when it is sensed for the first time.
-        
-            if (!players.isEmpty()) log.log("Have seen a Player/Players");//specificPlayer = players.getFirst();
-        
-            if(!players.isEmpty()){
-                for(int i = 0; i == players.lastIndexOf(a); i ++){
-                    specificPlayer = players.get(i);
-                    vecRobotBodyPart = specificPlayer.getBodyPart(BodyPartName.Head);
-                    heads[i] = vecRobotBodyPart;
-                    System.out.println("BodyPart Number "+i+" :"+vecRobotBodyPart.toString());   
-                }        
-            }
-            else log.log("Do not see Agent_Dummy (yet).");  
-        
-        
+        }
+      }
       // Access the data of a sensed player. Keep in mind, that not all
       // parts of the player are visible at any time, depending on the
       // orientations of the agent´s own robot and the sensed player .
@@ -113,20 +120,21 @@ public class SoccerThinkingTor {
       
       if (motion.ready()) {
       
-      log.log("new decision");
-      //this.playerList = localView.getAllPlayers();   //TODO
+        log.log("new decision");
+        //this.playerList = localView.getAllPlayers();   //TODO
 
-      System.out.println(playerList);
-      double serverTime = percIn.getServerTime();
-      
-      // if the robot has fallen down
-      if (percIn.getAcc().getZ() < 7) {
-        if (percIn.getAcc().getY() > 0) {
-          motion.setStandUpFromBack();
-        } else {
-          motion.setRollOverToBack();
-        }
-      }    
+        
+        double serverTime = percIn.getServerTime();
+
+        // if the robot has fallen down
+        if (percIn.getAcc().getZ() < 7) {
+          if (percIn.getAcc().getY() > 0) {
+            motion.setStandUpFromBack();
+          }
+          else {
+            motion.setRollOverToBack();
+          }
+        }    
+      }
     }
-  }
 }
